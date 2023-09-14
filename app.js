@@ -11,7 +11,7 @@ app.use(cors()); // Enable CORS for all routes
 app.get("/", (request, response) => {
     response.send("Node.js Users REST API 🎉");
 });
-
+//
 async function getUsersFromJSON() {
     const data = await fs.readFile("data.json");
     const users = JSON.parse(data);
