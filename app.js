@@ -22,15 +22,14 @@ async function getUsersFromJSON() {
 
 // READ all users
 app.get("/users", async (request, response) => {
-    connection.query(
-        //response.json(await getUsersFromJSON());
-        'SELECT * from users;',
-    function (err, results, fields) {
-      console.log(fields);
-        //console.log(fields);
-        response.json(fields);
+  const query = "SELECT * FROM users ORDER BY name";
+  connection.query(query, (error, results, fields) => {
+    if (error) {
+      console.log(error);
+    } else {
+      response.json(results);
     }
-  );
+  });
 });
 
 // READ one user
@@ -82,6 +81,6 @@ app.delete("/users/:id", async (request, response) => {
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
   console.log(`App listening on http://localhost:${port}`);
-    console.log(`Users Endpoint http://localhost:${port}/users`);
-    console.log(`Server is running`);
+  console.log(`Users Endpoint http://localhost:${port}/users`);
+  console.log(`Server is running`);
 });
